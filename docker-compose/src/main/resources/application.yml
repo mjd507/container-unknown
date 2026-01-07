@@ -1,6 +1,0 @@
-spring:
-  application.name: docker-compose
-  docker:
-    compose:
-      enabled: true
-      file: docker-compose/compose.yaml
