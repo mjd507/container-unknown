@@ -39,4 +39,5 @@ OpenTelemetry-Collector => Loki => Grafana
     - in query put：{service.name="test-app"}，
     - run query, log will be displayed
 
+![local-docker-grafana](https://github.com/user-attachments/assets/5722fa64-508a-4180-954e-826640f9ee1b)
 
