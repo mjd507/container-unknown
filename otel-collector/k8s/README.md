@@ -11,24 +11,21 @@
     
     kubectl apply -f grafana-deployment.yaml
     ```
-3. verify
+3. verify pods svc and prepare url.
     ```shell
     kubectl get pods
     
     kubectl get svc
     
-    minikube service grafana-service --url
+    minikube service otel-collector-service --url # get url for send curl request from external terminal
+   
+    minikube service grafana-service --url # get url for open grafana from external browser
+
     ```
 4. send request
    
    ```shell
-   OTEL_HTTP_PORT=$(kubectl get svc otel-collector-service -o jsonpath='{.spec.ports[1].nodePort}')
-   echo $OTEL_HTTP_PORT
-   
-   MINIKUBE_IP=$(minikube ip)
-   echo $MINIKUBE_IP 
-   
-   curl -X POST http://$MINIKUBE_IP:$OTEL_HTTP_PORT/v1/logs \
+   curl -X POST <get-url-from-above-step>/v1/logs \
      -H "Content-Type: application/json" \
      -d '{
        "resourceLogs": [
@@ -58,3 +55,10 @@
      }'
    
    ```
+
+5. verify in grafana
+
+   - `http://loki-service:3100` use this in grafana for datasource
+   - check the request logs are displayed in grafana
+
+![grafana-in-minikube](https://github.com/user-attachments/assets/94856d18-9b42-43b2-b690-ddf9b49d2356)
