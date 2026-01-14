@@ -10,6 +10,8 @@
     kubectl apply -f otel-collector-deployment.yaml
     
     kubectl apply -f grafana-deployment.yaml
+   
+    kubectl apply -f otel-ingress.yaml # (not used in this case, minikube provide ways to access internal pod service from an external url)
     ```
 3. verify pods svc and prepare url.
     ```shell
@@ -17,7 +19,7 @@
     
     kubectl get svc
     
-    minikube service otel-collector-service --url # get url for send curl request from external terminal
+    minikube service otel-collector-service --url # get url for sending curl request from external terminal
    
     minikube service grafana-service --url # get url for open grafana from external browser
 
